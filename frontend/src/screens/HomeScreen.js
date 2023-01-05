@@ -3,7 +3,7 @@ import React, { useEffect, useReducer } from 'react';
 import axios from 'axios';
 import logger from 'use-reducer-logger';
 import { Row, Col } from 'react-bootstrap';
-
+import { Helmet } from 'react-helmet-async';
 import Product from '../components/Product';
 
 const reducer = (state, action) => {
@@ -31,7 +31,7 @@ function HomeScreen() {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
       try {
-        const res = await axios.get('./api/products');
+        const res = await axios.get('/api/products');
         dispatch({ type: 'FETCH_SUCCESS', payload: res.data });
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: err.message });
@@ -43,6 +43,9 @@ function HomeScreen() {
 
   return (
     <div>
+      <Helmet>
+        <title>ecommerce</title>
+      </Helmet>
       <h1>Featured Products</h1>
       <div className='products'>
         {loading ? (
