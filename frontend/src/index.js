@@ -5,7 +5,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { StoreProvider } from './screens/Store';
+import { StoreProvider } from './Store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
