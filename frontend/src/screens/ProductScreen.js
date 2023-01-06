@@ -4,6 +4,9 @@ import { useParams } from 'react-router-dom';
 import { Row, Col, ListGroup, Button, Badge, Card } from 'react-bootstrap';
 import Rating from '../components/Rating';
 import { Helmet } from 'react-helmet-async';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
+import { getError } from '../utils';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -32,26 +35,30 @@ function ProductScreen() {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
       try {
-        const res = await axios.get(`/api/products/slug/${slug}`);
-        dispatch({ type: 'FETCH_SUCCESS', payload: res.data });
+        const result = await axios.get(`/api/products/slug/${slug}`);
+        dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
       } catch (err) {
-        dispatch({ type: 'FETCH_FAIL', payload: err.message });
+        dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
       }
     };
     fetchData();
   }, [slug]);
 
   return loading ? (
-    <div>Loading...</div>
+    <div>
+      <LoadingBox />
+    </div>
   ) : error ? (
-    <div>{error}</div>
+    <div>
+      <MessageBox variant='danger'>{error}</MessageBox>
+    </div>
   ) : (
     <div>
       <Row>
-        <Col md={4}>
+        <Col className='text-center' md={6}>
           <img style={{ height: '30rem' }} src={product.image} alt={product.name}></img>
         </Col>
-        <Col md={4}>
+        <Col md={3}>
           <ListGroup variant='flush'>
             <ListGroup.Item>
               <Helmet>
@@ -69,7 +76,7 @@ function ProductScreen() {
             </ListGroup.Item>
           </ListGroup>
         </Col>
-        <Col md={4}>
+        <Col md={3}>
           <Card>
             <Card.Body>
               <ListGroup variant='flush'>
