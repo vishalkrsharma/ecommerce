@@ -21,7 +21,7 @@ function App() {
               <LinkContainer to='/'>
                 <Navbar.Brand>ecommerce</Navbar.Brand>
               </LinkContainer>
-              <Nav className='me-auto'>
+              <Nav className='float-end'>
                 <Link to='/cart' className='nav-link'>
                   Cart
                   {cart.cartItems.length > 0 && (
