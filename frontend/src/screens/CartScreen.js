@@ -87,7 +87,7 @@ function CartScreen() {
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <div className='d-grid'>
-                    <Button type='button' variant='primary' disable={cartItems.length === 0} onClick={checkoutHandler}>
+                    <Button type='button' variant='primary' disabled={cartItems.length === 0} onClick={checkoutHandler}>
                       Proceed to Checkout
                     </Button>
                   </div>
