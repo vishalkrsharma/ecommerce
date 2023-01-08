@@ -69,10 +69,10 @@ function ProductScreen() {
   ) : error ? (
     <MessageBox variant='danger'>{error}</MessageBox>
   ) : (
-    <div>
+    <div className='mt-2'>
       <Row>
         <Col md={6}>
-          <img className='img-large' src={product.image} alt={product.name}></img>
+          <img className='img-fluid' src={product.image} alt={product.name}></img>
         </Col>
         <Col md={3}>
           <ListGroup variant='flush'>
